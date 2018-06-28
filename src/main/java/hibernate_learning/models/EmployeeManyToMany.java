@@ -9,16 +9,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="EmpM2M")
 public class EmployeeManyToMany {
 	@Id
 	@GeneratedValue
 	private
 	Integer id;
 	private String name;
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name ="Dep_Id")
+	@ManyToMany(mappedBy="employee",cascade=CascadeType.ALL)
+//	@JoinColumn(name ="Dep_Id")
 	private List<DepartmentManyToMany> department = new ArrayList<DepartmentManyToMany>();
 	
 	public Integer getId() {

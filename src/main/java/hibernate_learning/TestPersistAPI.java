@@ -15,33 +15,36 @@ public class TestPersistAPI {
 	public static void main(String... strings) {
 		SessionFactory sessionFactoryBuilder = HIbernateApplication.sessionFactoryBuilder();
 		
-//		new TestPersistAPI().testTansactionCommitDoesnotWorkWithoutBeginObject(sessionFactoryBuilder);
-		 new TestPersistAPI().testWithFlush(sessionFactoryBuilder);
+		new TestPersistAPI().testTansactionCommitDoesnotWorkWithoutBeginObject(sessionFactoryBuilder);
+		// new TestPersistAPI().testWithFlush(sessionFactoryBuilder);
 
-		// new
-		// TestPersistAPI().testSessionPersistenceFollowedBYEvictThrows(sessionFactoryBuilder);
-//		 new
-//		 TestPersistAPI().testSessionUpdateFollowedBYEvictThrows(sessionFactoryBuilder);
-//		new TestPersistAPI().testSessionMergeFollowedBYEvictThrows(sessionFactoryBuilder);
-		// new
-		// TestPersistAPI().testSessionSaveOrUpdateFollowedBYEvictThrows(sessionFactoryBuilder);
-		// new
-		// TestPersistAPI().testSessionSaveFollowedBYEvictThrows(sessionFactoryBuilder);
+		// new TestPersistAPI().testSessionPersistenceFollowedBYEvictThrows(sessionFactoryBuilder);
+		// new TestPersistAPI().testSessionUpdateFollowedBYEvictThrows(sessionFactoryBuilder);
+		// new TestPersistAPI().testSessionMergeFollowedBYEvictThrows(sessionFactoryBuilder);
+		// new TestPersistAPI().testSessionSaveOrUpdateFollowedBYEvictThrows(sessionFactoryBuilder);
+		// new TestPersistAPI().testSessionSaveFollowedBYEvictThrows(sessionFactoryBuilder);
 
 	}
 
 	private void testTansactionCommitDoesnotWorkWithoutBeginObject(SessionFactory sessionFactoryBuilder) {
 		Session openSession = sessionFactoryBuilder.openSession();
+		//transient entity
 		Vehicle vehicle = new Vehicle();
 		vehicle.setVehicleName("Bike");
 		System.out.println("before persist " + vehicle.getId());
+		//persistent entity
 		openSession.persist(vehicle);
-		System.out.println("before open session " + openSession.get(Vehicle.class, 1).getVehicleName());
-		openSession.getTransaction().commit();
+		System.out.println("before commit getting entity \n" + openSession.get(Vehicle.class, 1).getVehicleName());
+		//begintransaction and commit
+		openSession.beginTransaction().commit();
+		
+		//if done like this expect an error
+		//openSession.getTransaction().commit();
 		openSession.close();
-		System.out.println("after close session " + vehicle.getId());
+		System.out.println("after close session vehicle id assigned" + vehicle.getId());
+		
 		openSession = sessionFactoryBuilder.openSession();
-		System.out.println(openSession.get(Vehicle.class, 1));
+		System.out.println(openSession.get(Vehicle.class, 1).getVehicleName());
 		openSession.close();
 		sessionFactoryBuilder.close();
 	}
@@ -52,13 +55,13 @@ public class TestPersistAPI {
 		vehicle.setVehicleName("Bike");
 		System.out.println("before save " + vehicle.getId());
 		openSession.persist(vehicle);
-		openSession.persist(vehicle);
+//		openSession.persist(vehicle);
 		openSession.flush();
-		System.out.println("before open session " + openSession.get(Vehicle.class, 1).getVehicleName());
+//		System.out.println("before open session " + openSession.get(Vehicle.class, 1).getVehicleName());
 		openSession.close();
 		System.out.println("after close session " + vehicle.getId());
 		openSession = sessionFactoryBuilder.openSession();
-		System.out.println(openSession.get(Vehicle.class, 1));
+		System.out.println(openSession.get(Vehicle.class, 1).getVehicleName());
 		openSession.close();
 		sessionFactoryBuilder.close();
 	}

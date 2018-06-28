@@ -21,17 +21,17 @@ public class TestDeleteAPI {
 	private void testWithoutTransaction(SessionFactory sessionFactoryBuilder) {
 		Session openSession = sessionFactoryBuilder.openSession();
 		
-		Transaction tx = openSession.getTransaction();
-		tx.begin();
+//		Transaction tx = openSession.getTransaction();
+//		tx.begin();
 		Session openSession1 = sessionFactoryBuilder.openSession();
 		Vehicle vehicle = new Vehicle();
 		vehicle.setVehicleName("Bike");
 		System.out.println("before save " + vehicle.getId());
 		openSession.save(vehicle);
-		tx.commit();
+//		tx.commit();
 		System.out.println("before open session " + openSession.get(Vehicle.class, 1).getVehicleName());
 		System.out.println("before open session " + openSession1.get(Vehicle.class, 1).getVehicleName());
-//		openSession.getTransaction().commit();
+		openSession.beginTransaction().commit();
 		openSession.close();
 		openSession1.close();
 		System.out.println("after close session " + vehicle.getId());

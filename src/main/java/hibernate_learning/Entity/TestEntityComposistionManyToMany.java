@@ -15,6 +15,7 @@ public class TestEntityComposistionManyToMany {
 	}
 
 	private void testDepedentEntityPersistence(SessionFactory sessionFactory) {
+		
 		Session openSession = sessionFactory.openSession();
 		Transaction tx = openSession.beginTransaction();
 		tx.begin();

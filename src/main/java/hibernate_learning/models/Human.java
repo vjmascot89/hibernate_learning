@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 
+import hibernate_learning.models.embeddable.Address;
+
 @Entity
 public class Human {
 

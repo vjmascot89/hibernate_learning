@@ -6,14 +6,14 @@
 
     <session-factory>
     <!-- Database connection settings -->
-        <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/vijay</property>
-        <property name="connection.username">postgres</property>
-        <property name="connection.password">qwerty</property>
+        <property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+        <property name="connection.username">xtp</property>
+        <property name="connection.password">xtp</property>
 
         <property name="connection.pool_size">1</property><!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-        <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+        <property name="dialect">org.hibernate.dialect.Oracle9Dialect</property>
+<!--         <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property> -->
         
         <!-- 
             Disable the second-level cache -->

@@ -8,7 +8,6 @@ import javax.persistence.Id;
 public class Vehicle {
 	private Integer id;
 	private String vehicleName;
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	public Integer getId() {

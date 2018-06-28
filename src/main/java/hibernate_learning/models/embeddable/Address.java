@@ -1,4 +1,4 @@
-package hibernate_learning.models;
+package hibernate_learning.models.embeddable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
